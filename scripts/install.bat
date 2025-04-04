@@ -1,11 +1,13 @@
 @echo off
 SETLOCAL EnableDelayedExpansion
 
-REM Controleren op de aanwezigheid van Chocolatey
+REM Controleer of Chocolatey geïnstalleerd is
 where choco >nul 2>&1
 if %errorlevel% neq 0 (
-    echo Installing Chocolatey...
+    echo Chocolatey is not installed. Installing now...
     powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+) else (
+    echo Chocolatey is already installed.
 )
 
 REM Definieer paden en bestandsnamen
@@ -26,35 +28,14 @@ echo Extracting .NET SDK...
 if exist "%DOTNET_SDK_ZIP%" (
     powershell -command "try { Expand-Archive -Path '%DOTNET_SDK_ZIP%' -DestinationPath '%DOTNET_INSTALL_DIR%' -Force } catch { Write-Host $_.Exception.Message; exit 1 }"
 ) else (
-    echo Failed to download .NET SDK archive.
+    echo Failed to download .NET SDK archive. Check the download URL and internet connection.
     exit 1
 )
 
-REM Stel omgevingsvariabelen in voor de huidige sessie en toekomstige sessies
+REM Stel omgevingsvariabelen in
 set DOTNET_ROOT="%DOTNET_INSTALL_DIR%"
 set PATH="%DOTNET_INSTALL_DIR%;%PATH%"
 setx DOTNET_ROOT "%DOTNET_INSTALL_DIR%"
 setx PATH "%DOTNET_INSTALL_DIR%;%PATH%"
 
-REM Installatie van Git
-echo Installing Git...
-choco install git -y
-
-REM Kloon de repository, verwijder eerst een bestaande map indien aanwezig
-if exist "EasyDevOpsV2" (
-    echo Removing existing EasyDevOpsV2 directory...
-    rmdir /s /q EasyDevOpsV2
-)
-echo Cloning repository...
-git clone https://github.com/Rikkert2000/EasyDevOpsV2.git
-cd EasyDevOpsV2\frontend
-
-REM Run de .NET frontend applicatie
-echo Running .NET application...
-dotnet restore
-dotnet build
-dotnet run
-
-echo Installation and setup complete!
-pause
-ENDLOCAL
+REM Installatie
