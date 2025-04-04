@@ -1,0 +1,15 @@
+/home/rik/EasyDevOpsV2/frontend/bin/Debug/net8.0/frontend
+/home/rik/EasyDevOpsV2/frontend/bin/Debug/net8.0/frontend.deps.json
+/home/rik/EasyDevOpsV2/frontend/bin/Debug/net8.0/frontend.runtimeconfig.json
+/home/rik/EasyDevOpsV2/frontend/bin/Debug/net8.0/frontend.dll
+/home/rik/EasyDevOpsV2/frontend/bin/Debug/net8.0/frontend.pdb
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.GeneratedMSBuildEditorConfig.editorconfig
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.AssemblyInfoInputs.cache
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.AssemblyInfo.cs
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.csproj.CoreCompileInputs.cache
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.sourcelink.json
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.dll
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/refint/frontend.dll
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.pdb
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/frontend.genruntimeconfig.cache
+/home/rik/EasyDevOpsV2/frontend/obj/Debug/net8.0/ref/frontend.dll
