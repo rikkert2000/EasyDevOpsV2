@@ -9,7 +9,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Haal de code op uit de GitHub repository
-                git 'https://github.com/rikkert2000/EasyDevOpsV2.git'
+                git credentialsId: '1d59f8ec-3763-44db-becd-9bee64c89704', url: 'https://github.com/rikkert2000/EasyDevOpsV2.git'
+
             }
         }
         
