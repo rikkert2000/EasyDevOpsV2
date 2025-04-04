@@ -1,1 +1,1 @@
-# EasyDevOpsV2
+# EasyDevOps
