@@ -1,10 +1,12 @@
 @echo off
 SETLOCAL EnableDelayedExpansion
 
-echo Installing Chocolatey...
-powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+where choco >nul 2>&1
+if %errorlevel% neq 0 (
+    echo Installing Chocolatey...
+    powershell -Command "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))"
+)
 
-REM Definieer paden en bestandsnamen
 set DOTNET_SDK_URL=https://download.visualstudio.microsoft.com/download/pr/dotnet-sdk-8.0.100-win-x64.zip
 set DOTNET_SDK_ZIP=dotnet-sdk.zip
 set DOTNET_INSTALL_DIR=%USERPROFILE%\dotnet
