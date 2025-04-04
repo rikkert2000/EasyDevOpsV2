@@ -1,22 +1,40 @@
 @echo off
+SETLOCAL EnableDelayedExpansion
 
-REM Installeer .NET SDK 8
-REM Je zou .NET SDK 8 moeten downloaden van de officiële website of zorgen dat het geïnstalleerd is via een package manager zoals Chocolatey.
+REM Definieer paden en bestandsnamen
+set DOTNET_SDK_URL=https://download.visualstudio.microsoft.com/download/pr/dotnet-sdk-8.0.100-win-x64.zip
+set DOTNET_SDK_ZIP=dotnet-sdk.zip
+set DOTNET_INSTALL_DIR=%USERPROFILE%\dotnet
 
-cd %USERPROFILE%
-mkdir dotnet
-curl -o dotnet-sdk.zip https://download.visualstudio.microsoft.com/download/pr/dotnet-sdk-8.0.100-win-x64.zip
-tar -xf dotnet-sdk.zip -C %USERPROFILE%\dotnet
+REM Maak een directory voor .NET SDK en verplaats daarheen
+if not exist "%DOTNET_INSTALL_DIR%" mkdir "%DOTNET_INSTALL_DIR%"
+cd "%DOTNET_INSTALL_DIR%"
 
-set DOTNET_ROOT=%USERPROFILE%\dotnet
-set PATH=%USERPROFILE%\dotnet;%PATH%
+REM Download .NET SDK
+echo Downloading .NET SDK...
+powershell -command "Invoke-WebRequest -Uri '%DOTNET_SDK_URL%' -OutFile '%DOTNET_SDK_ZIP%'"
 
-REM Installeer Git
-REM Git kan worden geïnstalleerd via Chocolatey (choco install git -y) of door een vooraf gedownload installer uit te voeren.
+REM Pak het .NET SDK archief uit
+echo Extracting .NET SDK...
+powershell -command "Expand-Archive -Path '%DOTNET_SDK_ZIP%' -DestinationPath '%DOTNET_INSTALL_DIR%' -Force"
 
-REM Clone de repository
+REM Stel omgevingsvariabelen in
+setx DOTNET_ROOT "%DOTNET_INSTALL_DIR%"
+setx PATH "%DOTNET_INSTALL_DIR%;%PATH%"
+
+REM Installatie van Git (vereist Chocolatey te zijn geïnstalleerd)
+echo Installing Git...
+choco install git -y
+
+REM Kloon de repository (pas dit aan naar je behoeften)
+echo Cloning repository...
 git clone https://github.com/Rikkert2000/EasyDevOpsV2.git
 cd EasyDevOpsV2\frontend
 
 REM Run de .NET frontend applicatie
+echo Running .NET application...
 dotnet run
+
+echo Installation and setup complete!
+pause
+ENDLOCAL
